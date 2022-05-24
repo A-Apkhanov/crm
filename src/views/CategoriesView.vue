@@ -68,11 +68,12 @@
               </div>
 
               <div class="input-field">
+                <input
+                  id="edit-limit"
+                  type="number"
+                >
+                <!--                eslint-disable-next-line-->
                 <label for="edit-limit">
-                  <input
-                    id="edit-limit"
-                    type="number"
-                  >
                   Лимит
                 </label>
                 <span class="helper-text invalid">LIMIT</span>
