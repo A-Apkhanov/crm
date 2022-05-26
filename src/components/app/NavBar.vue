@@ -17,6 +17,7 @@
             class="dropdown-trigger black-text"
             href="#"
             data-target="dropdown"
+            ref="dropdownTrigger"
           >
             USER NAME
             <i class="material-icons right">arrow_drop_down</i>
@@ -27,12 +28,12 @@
             class="dropdown-content"
           >
             <li>
-              <a
-                href="#"
+              <router-link
+                to="/profile"
                 class="black-text"
               >
                 <i class="material-icons">account_circle</i>Профиль
-              </a>
+              </router-link>
             </li>
             <li
               class="divider"
@@ -42,6 +43,7 @@
               <a
                 href="#"
                 class="black-text"
+                @click.prevent="logout"
               >
                 <i class="material-icons">assignment_return</i>Выйти
               </a>
@@ -56,5 +58,16 @@
 <script>
 export default {
   name: 'NavBar',
+  methods: {
+    logout() {
+      this.$router.push('/login?message=logout');
+    },
+  },
+  mounted() {
+    // eslint-disable-next-line no-undef
+    M.Dropdown.init(this.$refs.dropdownTrigger, {
+      constrainWidth: false,
+    });
+  },
 };
 </script>

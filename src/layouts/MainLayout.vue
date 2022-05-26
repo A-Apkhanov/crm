@@ -1,6 +1,6 @@
 <template>
   <div class="app-main-layout">
-    <NavBar @click="isOpenSidebar = !isOpenSidebar" />
+    <NavBar @on-click-toggle-sidebar="isOpenSidebar = !isOpenSidebar" />
     <SideBar :is-open-sidebar="isOpenSidebar" />
     <main
       class="app-content"
