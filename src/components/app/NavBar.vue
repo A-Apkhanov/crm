@@ -8,7 +8,7 @@
         >
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">12.12.12</span>
+        <span class="black-text">{{ formatDate }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -58,16 +58,47 @@
 <script>
 export default {
   name: 'NavBar',
+  data() {
+    return {
+      date: new Date(),
+      interval: null,
+      dropdown: null,
+    };
+  },
   methods: {
     logout() {
       this.$router.push('/login?message=logout');
     },
   },
+  computed: {
+    formatDate() {
+      const options = {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      };
+      return new Intl
+        .DateTimeFormat('ru-RU', options)
+        .format(new Date(this.date));
+    },
+  },
   mounted() {
+    this.interval = setInterval(() => {
+      this.date = new Date();
+    }, 1000);
     // eslint-disable-next-line no-undef
-    M.Dropdown.init(this.$refs.dropdownTrigger, {
+    this.dropdown = M.Dropdown.init(this.$refs.dropdownTrigger, {
       constrainWidth: false,
     });
+  },
+  beforeUnmount() {
+    clearInterval(this.interval);
+    if (this.dropdown && this.dropdown.destroy) {
+      this.dropdown.destroy();
+    }
   },
 };
 </script>
