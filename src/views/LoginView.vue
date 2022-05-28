@@ -63,6 +63,7 @@
 <script>
 import useVuelidate from '@vuelidate/core';
 import { email, minLength, required } from '@vuelidate/validators';
+import messages from '@/services/messages';
 
 export default {
   name: 'LoginView',
@@ -86,6 +87,11 @@ export default {
         required,
       },
     };
+  },
+  mounted() {
+    if (messages[this.$route.query.message]) {
+      this.$message(messages[this.$route.query.message]);
+    }
   },
   methods: {
     handleSubmitForm() {
