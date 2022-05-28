@@ -8,7 +8,7 @@
         >
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ formatDate }}</span>
+        <span class="black-text">{{ formattedDate }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -56,6 +56,8 @@
 </template>
 
 <script>
+import formatDate from '@/services/formatDate';
+
 export default {
   name: 'NavBar',
   data() {
@@ -71,18 +73,8 @@ export default {
     },
   },
   computed: {
-    formatDate() {
-      const options = {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-      };
-      return new Intl
-        .DateTimeFormat('ru-RU', options)
-        .format(new Date(this.date));
+    formattedDate() {
+      return formatDate(this.date, 'datetime');
     },
   },
   mounted() {
