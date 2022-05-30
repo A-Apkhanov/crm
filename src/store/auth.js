@@ -1,11 +1,42 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut,
+} from 'firebase/auth';
+import { getDatabase, ref, set } from 'firebase/database';
 
 export default {
   actions: {
-    // eslint-disable-next-line no-unused-vars
-    async login({ dispatch, commit }, { email, password }) {
+    async getUid() {
       const auth = getAuth();
-      await signInWithEmailAndPassword(auth, email, password);
+      const user = auth.currentUser;
+      return await user ? user.uid : null;
+    },
+    async login({ commit }, { email, password }) {
+      const auth = getAuth();
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (e) {
+        commit('setError', e);
+        throw e;
+      }
+    },
+    async register({ dispatch, commit }, { email, password, name }) {
+      const auth = getAuth();
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        const uid = await dispatch('getUid');
+        const db = getDatabase();
+        await set(ref(db, `users/${uid}/info`), {
+          bill: 100000,
+          name,
+        });
+      } catch (e) {
+        commit('setError', e);
+        throw e;
+      }
+    },
+    async logout() {
+      const auth = getAuth();
+      await signOut(auth);
     },
   },
 };

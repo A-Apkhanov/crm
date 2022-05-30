@@ -121,7 +121,7 @@ export default {
     };
   },
   methods: {
-    handleSubmitForm() {
+    async handleSubmitForm() {
       if (this.v$.$invalid) {
         this.v$.$touch();
         return;
@@ -133,9 +133,11 @@ export default {
         name: this.name,
       };
 
-      console.log('####: formData', formData);
-
-      this.$router.push('/');
+      try {
+        await this.$store.dispatch('register', formData);
+        this.$router.push('/');
+        // eslint-disable-next-line no-empty
+      } catch (e) {}
     },
   },
 };
