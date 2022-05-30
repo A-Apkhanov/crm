@@ -108,9 +108,8 @@ export default {
       try {
         await this.$store.dispatch('login', formData);
         this.$router.push('/');
-      } catch (e) {
-        console.log('####: Error', e);
-      }
+        // eslint-disable-next-line no-empty
+      } catch (e) {}
     },
   },
 };
