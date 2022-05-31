@@ -33,6 +33,11 @@ export default {
       isOpenSidebar: true,
     };
   },
+  async mounted() {
+    if (this.$store.getters.info === null) {
+      await this.$store.dispatch('fetchUserInfo');
+    }
+  },
   components: {
     NavBar,
     SideBar,

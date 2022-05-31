@@ -19,7 +19,7 @@
             data-target="dropdown"
             ref="dropdownTrigger"
           >
-            USER NAME
+            {{ name }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -76,6 +76,9 @@ export default {
   computed: {
     formattedDate() {
       return formatDate(this.date, 'datetime');
+    },
+    name() {
+      return this.$store.getters.info && this.$store.getters.info.name;
     },
   },
   mounted() {
