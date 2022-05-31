@@ -13,12 +13,12 @@ import './registerServiceWorker';
 import 'materialize-css/dist/js/materialize.min';
 
 initializeApp({
-  apiKey: 'AIzaSyAkXN49oVAr7e_cfypDHsHiskoqpnUiQ08',
-  authDomain: 'mycrm-a67ae.firebaseapp.com',
-  projectId: 'mycrm-a67ae',
-  storageBucket: 'mycrm-a67ae.appspot.com',
-  messagingSenderId: '794021724602',
-  appId: '1:794021724602:web:91bf1c47bf333e0cf1dd83',
+  apiKey: process.env.VUE_APP_FB_API_KEY,
+  authDomain: process.env.VUE_APP_FB_AUTH_DOMAIN,
+  projectId: process.env.VUE_APP_FB_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FB_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_FB_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_FB_APP_ID,
 });
 
 const auth = getAuth();
