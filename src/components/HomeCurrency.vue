@@ -15,10 +15,13 @@
           </thead>
 
           <tbody>
-            <tr>
-              <td>руб</td>
-              <td>12121</td>
-              <td>12.12.12</td>
+            <tr
+              v-for="cur of currencies"
+              :key="cur"
+            >
+              <td>{{ cur }}</td>
+              <td>{{ formattedCurrency(this.rates[cur]) }}</td>
+              <td>{{ formattedDate }}</td>
             </tr>
           </tbody>
         </table>
@@ -28,7 +31,27 @@
 </template>
 
 <script>
+import formatDate from '@/services/formatDate';
+import formatCurrency from '@/services/formatCurrency';
+
 export default {
   name: 'HomeCurrency',
+  data() {
+    return {
+      rates: this.$store.getters.exchangeRates.rates,
+      date: this.$store.getters.exchangeRates.date,
+      currencies: ['RUB', 'EUR', 'USD'],
+    };
+  },
+  methods: {
+    formattedCurrency(value) {
+      return formatCurrency(1 / value);
+    },
+  },
+  computed: {
+    formattedDate() {
+      return formatDate(this.date, 'date');
+    },
+  },
 };
 </script>

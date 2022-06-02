@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
 import auth from './auth';
 import userInfo from './userInfo';
+import exchangeRates from './exchangeRates';
 
 export default createStore({
   state: {
@@ -20,6 +21,6 @@ export default createStore({
   actions: {
   },
   modules: {
-    auth, userInfo,
+    auth, userInfo, exchangeRates,
   },
 });
