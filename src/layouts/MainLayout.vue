@@ -1,5 +1,7 @@
 <template>
-  <div class="app-main-layout">
+  <div
+    class="app-main-layout"
+  >
     <NavBar @on-click-toggle-sidebar="isOpenSidebar = !isOpenSidebar" />
     <SideBar :is-open-sidebar="isOpenSidebar" />
     <main
@@ -31,6 +33,7 @@ export default {
   data() {
     return {
       isOpenSidebar: true,
+      isLoading: true,
     };
   },
   async mounted() {
@@ -39,8 +42,7 @@ export default {
     }
   },
   components: {
-    NavBar,
-    SideBar,
+    NavBar, SideBar,
   },
 };
 </script>

@@ -3,7 +3,10 @@
     <div class="page-title">
       <h3>Счет</h3>
 
-      <button class="btn waves-effect waves-light btn-small">
+      <button
+        @click="handleClickRefresh"
+        class="btn waves-effect waves-light btn-small"
+      >
         <i class="material-icons">refresh</i>
       </button>
     </div>
@@ -30,8 +33,21 @@ export default {
   data() {
     return {
       isLoading: true,
-      currency: null,
     };
+  },
+  async mounted() {
+    await this.loadingData();
+  },
+  methods: {
+    async handleClickRefresh() {
+      this.isLoading = true;
+      await this.loadingData();
+    },
+    async loadingData() {
+      await this.$store.dispatch('fetchExchangeRates');
+      console.log('####: ', this.$store.getters.info);
+      this.isLoading = false;
+    },
   },
   components: {
     HomeBill, HomeCurrency, LoaderIcon,
