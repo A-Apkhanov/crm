@@ -93,12 +93,11 @@ export default {
       };
 
       try {
-        const category = await this.$store.dispatch('createCategory', formData);
+        await this.$store.dispatch('createCategory', formData);
         this.title = '';
         this.limit = 100;
         this.v$.$reset();
         this.$message('Категория была создана');
-        this.$emit('createdNewCategory', category);
         // eslint-disable-next-line no-empty
       } catch (e) {}
     },
