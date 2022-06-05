@@ -45,7 +45,6 @@ export default {
     },
     async loadingData() {
       await this.$store.dispatch('fetchExchangeRates');
-      console.log('####: ', this.$store.getters.info);
       this.isLoading = false;
     },
   },
