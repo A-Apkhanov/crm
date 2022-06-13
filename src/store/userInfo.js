@@ -1,4 +1,6 @@
-import { getDatabase, ref, onValue } from 'firebase/database';
+import {
+  getDatabase, ref, onValue, update,
+} from 'firebase/database';
 
 export default {
   state: {
@@ -24,8 +26,27 @@ export default {
           },
           { onlyOnce: true },
         );
-        // eslint-disable-next-line no-empty
-      } catch (e) {}
+      } catch (e) {
+        commit('setError', e);
+        throw e;
+      }
+    },
+    async updateInfo({ dispatch, commit }, newInfo) {
+      try {
+        const uid = await dispatch('getUid');
+        const db = getDatabase();
+        const updateInfo = {
+          ...this.getters.info,
+          ...newInfo,
+        };
+        const updates = {};
+        updates[`users/${uid}/info`] = updateInfo;
+        await update(ref(db), updates);
+        commit('setInfo', updateInfo);
+      } catch (e) {
+        commit('setError', e);
+        throw e;
+      }
     },
   },
   getters: {
