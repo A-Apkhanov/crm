@@ -19,7 +19,8 @@ export default {
       try {
         const uid = await dispatch('getUid');
         const dbRef = ref(getDatabase());
-        const categories = await get(child(dbRef, `users/${uid}/categories`)).then((snapshot) => snapshot.val());
+        const categories = await get(child(dbRef, `users/${uid}/categories`))
+          .then((snapshot) => snapshot.val());
         if (categories) {
           commit(
             'setCategories',

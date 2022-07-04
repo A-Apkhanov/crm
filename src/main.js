@@ -8,6 +8,7 @@ import router from './router';
 import store from './store';
 
 import messagePlugin from './services/message.plugin';
+import tooltipDirective from './directives/tooltip.directive';
 
 import './registerServiceWorker';
 
@@ -31,6 +32,7 @@ onAuthStateChanged(auth, () => {
       .use(store)
       .use(router)
       .use(messagePlugin)
+      .directive('tooltip', tooltipDirective)
       .mount('#app');
   }
 });
