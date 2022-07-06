@@ -29,7 +29,8 @@ export default {
   },
   methods: {
     getCurrencyAccount(currency) {
-      const currencyAccount = this.$store.getters.info.bill
+      const bill = this.$store.getters.info.bill || 0;
+      const currencyAccount = bill
         * this.$store.getters.exchangeRates.rates[currency];
       return formatCurrency(currencyAccount, currency);
     },
