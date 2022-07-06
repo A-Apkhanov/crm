@@ -28,6 +28,7 @@
 <script>
 import NavBar from '@/components/app/NavBar.vue';
 import SideBar from '@/components/app/SideBar.vue';
+import messages from '@/services/messages';
 
 export default {
   name: 'MainLayout',
@@ -36,6 +37,16 @@ export default {
       isOpenSidebar: true,
       isLoading: true,
     };
+  },
+  computed: {
+    error() {
+      return this.$store.getters.error;
+    },
+  },
+  watch: {
+    error(fbError) {
+      this.$error(messages[fbError.code] || 'Что-то пошло не так');
+    },
   },
   async mounted() {
     if (this.$store.getters.info === null) {
