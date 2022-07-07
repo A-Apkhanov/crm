@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import HistoryTable from '@/components/app/HistoryTable.vue';
+import HistoryTable from '@/components/HistoryTable.vue';
 import LoaderIcon from '@/components/app/LoaderIcon.vue';
 
 export default {
