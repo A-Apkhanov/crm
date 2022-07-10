@@ -49,9 +49,10 @@ export default {
     },
   },
   async mounted() {
-    if (this.$store.getters.info === null) {
+    try {
       await this.$store.dispatch('fetchUserInfo');
-    }
+      // eslint-disable-next-line no-empty
+    } catch (e) {}
   },
   components: {
     NavBar, SideBar,
