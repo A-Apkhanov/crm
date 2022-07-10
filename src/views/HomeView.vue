@@ -44,7 +44,11 @@ export default {
       await this.loadingData();
     },
     async loadingData() {
-      await this.$store.dispatch('fetchExchangeRates');
+      try {
+        await this.$store.dispatch('fetchExchangeRates');
+        // eslint-disable-next-line no-empty
+      } catch (e) {}
+
       this.isLoading = false;
     },
   },
