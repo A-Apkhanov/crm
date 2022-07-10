@@ -4,11 +4,12 @@ import {
 
 export default {
   state: {
-    info: null,
+    info: JSON.parse(localStorage.getItem('user')) || null,
   },
   mutations: {
     setInfo(state, info) {
       state.info = info;
+      localStorage.setItem('user', JSON.stringify(info));
     },
     clearInfo(state) {
       state.info = null;
