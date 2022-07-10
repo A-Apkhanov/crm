@@ -13,6 +13,7 @@ export default {
     },
     clearInfo(state) {
       state.info = null;
+      localStorage.removeItem('user');
     },
   },
   actions: {
