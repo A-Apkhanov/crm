@@ -94,10 +94,13 @@ export default {
     },
   },
   async mounted() {
-    await this.$store.dispatch('getCategories');
-    await this.$store.dispatch('getRecords');
+    try {
+      await this.$store.dispatch('getCategories');
+      await this.$store.dispatch('getRecords');
 
-    this.setup();
+      this.setup();
+      // eslint-disable-next-line no-empty
+    } catch (e) {}
 
     this.isLoading = false;
   },

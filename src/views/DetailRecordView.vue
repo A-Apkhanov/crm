@@ -66,16 +66,20 @@ export default {
   },
   async mounted() {
     const { id } = this.$route.params;
-    const record = await this.$store.dispatch('getRecordById', id);
-    if (record) {
-      const category = await this.$store.dispatch('getCategoryById', record.categoryId);
-      this.record = {
-        ...record,
-        categoryName: category.title,
-        typeClass: record.type === 'income' ? 'green' : 'red',
-        typeText: record.type === 'income' ? 'Доход' : 'Расход',
-      };
-    }
+    try {
+      const record = await this.$store.dispatch('getRecordById', id);
+      if (record) {
+        const category = await this.$store.dispatch('getCategoryById', record.categoryId);
+        this.record = {
+          ...record,
+          categoryName: category.title,
+          typeClass: record.type === 'income' ? 'green' : 'red',
+          typeText: record.type === 'income' ? 'Доход' : 'Расход',
+        };
+      }
+      // eslint-disable-next-line no-empty
+    } catch (e) {}
+
     this.isLoading = false;
   },
 };
