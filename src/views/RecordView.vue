@@ -199,9 +199,10 @@ export default {
           await this.$store.dispatch('createRecord', formData);
           await this.$store.dispatch('updateInfo', { bill: newBill });
           this.$message('Запись успешно создана');
-          this.v$.reset();
+          this.v$.$reset();
           this.amount = 1;
           this.description = '';
+          this.type = 'outcome';
           // eslint-disable-next-line no-empty
         } catch (e) {}
       } else {
